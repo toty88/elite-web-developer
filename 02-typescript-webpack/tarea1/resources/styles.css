@@ -1,0 +1,39 @@
+@font-face {
+    font-family: rickMortyFont;
+    src: url('./rick.ttf')
+}
+
+body {
+    background-color: #191919;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+}
+
+#title {
+    text-align: center;
+    font-size: 4rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: rickMortyFont;
+}
+
+.list-characters {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.li-character {
+    list-style: none;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.li-character>label {
+    /* font-family: ; */
+    font-size: x-large;
+    margin-bottom: 1rem;
+}
