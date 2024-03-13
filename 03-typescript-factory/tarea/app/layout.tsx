@@ -9,12 +9,15 @@ export const metadata: Metadata = {
   description: "Clase 03 elite-web-developer",
 };
 
-export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode;}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
-      <body className="bg-bestShowEver bg-fixed" >
+      <body className="relative bg-bestShowEver bg-fixed" >
+        <div className="absolute inset-0 bg-white opacity-20"></div>
         <QueryProvider>
-          {children}
+          <div className="relative z-10">
+            {children}
+          </div>
         </QueryProvider>
       </body>
     </html>
