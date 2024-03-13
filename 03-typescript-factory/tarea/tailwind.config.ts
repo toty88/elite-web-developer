@@ -12,8 +12,11 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+          "bestShowEver": "url('../assets/rm_bg.png')",
       },
-      fontFamily: { 'rickAndMorty': ['rickAndMorty', 'sans-serif'] }
+      fontFamily: { 
+        'rickAndMorty': ['rickAndMorty', 'sans-serif'] 
+      }
     },
   },
   plugins: [],
