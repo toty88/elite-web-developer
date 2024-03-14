@@ -1,22 +1,18 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
-import { FilterRadio } from "../FilterRadio";
-import { PrevIcon, NextIcon } from "@/utils/icons";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { FilterPanel } from "../FilterPanel";
 import { axiosFetch } from "../../utils/helpers";
 import { useFilter } from "@/utils/hooks/useFilter";
 import { Character, RickMortyApi } from "@/utils/types";
+import { useCurrentPageStore } from "../store/currentPage";
 import { getStrategy, getArrayReduced } from "@/utils/helpers";
-
-import { FilterPanel } from "../FilterPanel";
-
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export function CharacterList() {
 
-    const [page, setPage] = useState(1);
-
+    const page = useCurrentPageStore(state => state.currentPage);
+    const setPage = useCurrentPageStore(state => state.setCurrentPage);
     const { data, isLoading, isError, isPlaceholderData } = useQuery({
         queryKey: ['character', page],
         queryFn: () => axiosFetch<RickMortyApi>('https://rickandmortyapi.com/api/character/?page=' + page),
@@ -27,18 +23,17 @@ export function CharacterList() {
     const status = getArrayReduced(characters, 'status');
     const species = getArrayReduced(characters, 'species');
     const gender = getArrayReduced(characters, 'gender');
-    const arr = [status, species, gender];
     const { filteredItems, setFilterStrategy } = useFilter(characters);
 
 
-    if (isLoading) return <h1 className="text-center text-8xl uppercase mb-5">Loading...</h1>;
-    if (isError) return <h1>Error</h1>;
+    if (isLoading) return <h1 className="text-center text-7xl text-white mb-5">Loading...</h1>;
+    if (isError) return <h1 className="text-center text-7xl text-white mb-5">Error</h1>;
 
     const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         const { name, value } = e.target;
         console.log(name, value);
-        
+
         setFilterStrategy(getStrategy(name, value));
     }
 
@@ -46,12 +41,13 @@ export function CharacterList() {
     return (
         <div className="w-full">
             <FilterPanel
-                setPage={setPage}
+                page={page}
                 data={data}
+                setPage={setPage}
                 isPlaceholderData={isPlaceholderData}
-                radioName={["status", "species", "gender"]}
-                radiosValues={[status, species, gender]}
                 handleRadioChange={handleRadioChange}
+                radiosValues={[status, species, gender]}
+                radioName={["status", "species", "gender"]}
             />
             <div className="flex flex-col flex-wrap">
                 <div className="flex flex-wrap justify-center">
