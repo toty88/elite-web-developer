@@ -1,13 +1,13 @@
-import { signal } from "@preact/signals-react";
+import { useState } from "react";
 import { Character } from "../types";
 import { Filter, NoFilter } from "../patterns/filterStrategy";
 
 
 export const useFilter = (characters: Character[]) => {
 
-    const setFilterStrategy = signal<Filter>(new NoFilter());
+    const [filterStrategy, setFilterStrategy] = useState<Filter>(new NoFilter());
 
-    const filteredItems = signal(() => setFilterStrategy.value.filter(characters));
+    const filteredItems = filterStrategy.filter(characters);
 
     return { filteredItems, setFilterStrategy }
 }

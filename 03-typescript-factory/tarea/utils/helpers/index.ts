@@ -1,6 +1,5 @@
 import axios from "axios";
 import { NoFilter, StatusFilter, SpeciesFilter, GenderFilter } from "@/utils/patterns/filterStrategy";
-import { Character } from "../types";
 
 export async function axiosFetch<T>(uri: string): Promise<T> {
 
